@@ -26,19 +26,19 @@ If the website is using form-builder.js, this script will be included after the 
 
 });`
 
-**Compatible with these websites**
+***Compatible with these websites***
 
-*forskolin.promo.js*
+**forskolin.promo.js**
 
 - forskolinactive.com
 
 
-*fitonorm.promo.js*
+**fitonorm.promo.js**
 
 - fitonorm.com
 
 
-*diet-trends.promo.js*
+**diet-trends.promo.js**
 
 - diet-trends.us/mjs
 - izabela.wiltu.com
