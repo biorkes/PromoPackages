@@ -7,14 +7,23 @@ To activate promo scripts, include this snippet in a `<script></script>` tags as
 If the website is using form-builder.js, this script will be included after the form initialization.
 
 `document.addEventListener("DOMContentLoaded", function(event) {
-    (function(){
+
+    ( function(){
+
       var dir = document.querySelector('script[src$="form-builder.js"]');
+
       if(dir !== null){
+
           var scriptEle = document.createElement("script");
+
           scriptEle.src = "forskolin.promo.js" + "?v=" + new Date().getTime();
+
           dir.appendChild(scriptEle);
+
       }
-    }());
+
+    }() );
+
 });`
 
 **Compatible with these websites**
