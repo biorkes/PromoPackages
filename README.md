@@ -2,22 +2,20 @@
 Activates Promo packages
 
 
-To activate promo scripts, include this snippet as a "body script" in Cmanager or directly in the web.
+To activate promo scripts, include this snippet in a `<script></script>` tags as a "body script" in Cmanager or directly in the web.
 
 If the website is using form-builder.js, this script will be included after the form initialization.
 
-`<script type="text/javascript">
-    document.addEventListener("DOMContentLoaded", function(event) {
-        (function(){
-          var dir = document.querySelector('script[src$="form-builder.js"]');
-          if(dir !== null){
-              var scriptEle = document.createElement("script");
-              scriptEle.src = "forskolin.promo.js" + "?v=" + new Date().getTime();
-              dir.appendChild(scriptEle);
-          }
-        }());
-    });
-</script>`
+`document.addEventListener("DOMContentLoaded", function(event) {
+    (function(){
+      var dir = document.querySelector('script[src$="form-builder.js"]');
+      if(dir !== null){
+          var scriptEle = document.createElement("script");
+          scriptEle.src = "forskolin.promo.js" + "?v=" + new Date().getTime();
+          dir.appendChild(scriptEle);
+      }
+    }());
+});`
 
 **Compatible with these websites**
 
