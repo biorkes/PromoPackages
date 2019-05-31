@@ -26,7 +26,7 @@ If the website is using form-builder.js, this script will be included after the 
 
 });`
 
-***Compatible with these websites***
+# Compatible with these websites
 
 **forskolin.promo.js**
 
