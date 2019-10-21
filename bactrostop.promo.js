@@ -1,4 +1,4 @@
-var extend = function ( defaults, options ) {
+  var extend = function ( defaults, options ) {
     var extended = {};
     var prop;
     for (prop in defaults) {
@@ -14,7 +14,6 @@ var extend = function ( defaults, options ) {
     return extended;
   };
 
-
   const settingsDefault = {
 
     moduleAlwaysActive: true,
@@ -22,8 +21,8 @@ var extend = function ( defaults, options ) {
     countryInput: $('[name="country"]'),
     orderbox: $('.product'),
     orderSeq: [1,3,5,8],
-    orderImages: ['1-package.png','2-packages.png','3-packages.png','4-packages.png'],
-    orderImagesPath: '//schnellevena.com/js/packages/images/',
+    orderImages: ['1-package.jpg','2-1-packages.png','3-2-packages.png','4-4-packages.jpg'],
+    orderImagesPath: '//bactrostop.com/js/packages/images/',
     gratisBox: '.product-name',
     supplyBox: '.product-qty',
     discountClass: 'getfree',
@@ -189,7 +188,6 @@ var extend = function ( defaults, options ) {
           (resolve, reject) => {
           if (typeof setPrice === "function") { 
             
-            
             let quantityEle = document.querySelectorAll("[name=quantity]")[0];
             productsArray.forEach(function(product) {
               product.addEventListener('click', function(e) {
@@ -200,7 +198,7 @@ var extend = function ( defaults, options ) {
                 var quantityOrder = this.attributes["data-order"].value;
                 quantityReg = quantity;
                 quantityEle.value = quantityOrder;
-                setPrice( quantity );
+                setPrice( quantity - 1 );
               });
             });
 
@@ -266,9 +264,16 @@ var extend = function ( defaults, options ) {
 
   //changes images
   function changeImage(el, path, img){
-    let imgElement = $(el).find('.product-thumb img')[0];
+    let imgElement = $(el).find('.product-thumb')[0];
     let imagePath = path + img;
-    addAttribute(imgElement, 'src', imagePath);
+    addAttribute(imgElement, 'style', 'background-image: url('+imagePath+')');
+  }
+
+  function removeLoader(){
+    if (typeof loader === "function") { 
+      console.log(333);
+      setTimeout(loader(), 6000);
+    }
   }
 
   //adding Data Order
@@ -279,12 +284,14 @@ var extend = function ( defaults, options ) {
       if(dataOrder == false){
         $(this).hide();
       }else{
+        changeImage($(this),settings.orderImagesPath, settings.orderImages[q-1])
         addAttribute($(this), 'data-order',dataOrder)
         addGratisText( $($(this)).find(settings.gratisBox), dataOrder, q);
-        changeTimesQty($($(this)).find('.product-qty'),dataOrder);
-        replaceMontlyDose($($(this)).find('.montly-dose'),dataOrder)
+        changeTimesQty($($(this)).find('.product-quantity'),dataOrder);
+        removeLoader();
+        // replaceMontlyDose($($(this)).find('.montly-dose'),dataOrder)
         // replaceSupplyPeriod( $($(this)).find(settings.supplyBox), dataOrder, q);
-        changeImage($(this),settings.orderImagesPath, settings.orderImages[q-1])
       }
     });
   }
+  console.log(3)
