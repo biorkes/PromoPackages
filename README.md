@@ -174,14 +174,14 @@ If the website is using form-builder.js, this script will be included after the 
 | ro | "GRATIS" |
 | es | "GRATIS" |
 | it | "GRATUITO" |
-| pt | "GRГЃTIS" |
+| pt | "GRÁTIS" |
 | sk | "ZADARMO" |
-| si | "BREZPLAДЊNO" |
+| si | "BREZPLAČNO" |
 | pl | "ZA DARMO" |
 | hu | "INGYEN" |
 | hr | "BESPLATNO" |
 | cz | "ZDARMA" |
-| gr | "О”О©ОЎО•О†Оќ" |
+| gr | "ΔΩΡΕΆΝ" |
 
 ```
 <script type="text/javascript">
