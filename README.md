@@ -129,7 +129,7 @@ If the website is using form-builder.js, this script will be included after the 
               var dir = document.querySelector('script[src$="form-builder.js"]');
               if(dir !== null){
                   var scriptEle = document.createElement("script");
-                  scriptEle.src = "//schnellevena.com/js/packages/schnellevena.promo.js" + "?v=" + new Date().getTime();
+                  scriptEle.src = "//glycozal.com/js/packages/glycozal.promo.js" + "?v=" + new Date().getTime();
                   dir.appendChild(scriptEle);
               }
       }());
