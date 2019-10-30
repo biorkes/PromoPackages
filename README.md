@@ -64,9 +64,9 @@ If the website is using form-builder.js, this script will be included after the 
 
 # Mezoderma
 
-*Syntax for Mezoderma* 
+**Syntax for Mezoderma* *
 
-** Upload the Product Images in desired directory, change the urls **
+**Upload the Product Images in desired directory, change the urls**
 
 ```
 <script type="text/javascript">
@@ -79,7 +79,7 @@ If the website is using form-builder.js, this script will be included after the 
 </script>
 ```
 
-*JS FORM*
+**JS FORM**
 
 ```
 <script type="text/javascript">
@@ -96,18 +96,19 @@ If the website is using form-builder.js, this script will be included after the 
 </script>
 ```
 
-*PHP FORM*
+**PHP FORM**
 
 ```
 <script src="//mezodermacream.com/js/packages/packages.js"></script>
 ```
 
 
+
 # Glycozal
 
-*Syntax for Glycozal*
+**Syntax for Glycozal**
 
-** Upload the Product Images in desired directory, change the urls **
+**Upload the Product Images in desired directory, change the urls**
 
 ```
 <script type="text/javascript">
@@ -119,7 +120,7 @@ If the website is using form-builder.js, this script will be included after the 
 </script>
 ```
 
-*JS FORM*
+**JS FORM**
 
 ```
 <script type="text/javascript">
@@ -134,9 +135,66 @@ If the website is using form-builder.js, this script will be included after the 
       }());
   });
 </script>
+```
 
-*PHP FORM*
+**PHP FORM**
 
 ```
 <script src="//schnellevena.com/js/packages/schnellevena.promo.js"></script>
 ```
+
+
+
+# Forskolin
+
+**Syntax for Forskolin**
+**ALL SETTINGS ARE HARDCODED**
+
+| Setting       | Value         |
+| ------------- | ------------- |
+| moduleAlwaysActive | false |
+| moduleActivationParam | 'promo' |
+| countryInput | $('[name="country"]') |
+| orderbox | $('.product') |
+| orderSeq | [1,3,5,false] |
+| orderImages | ['product1.png','product2_1free.png','product3_2free.png','product4.png'] |
+| orderImagesPath | '//forskolinactive.com/js/img/' |
+| gratisBox | '.box-header' |
+| supplyBox | '.supply' |
+| discountClass | 'getfree' |
+| discountStyle | 'background: #a30c7f; color: white;padding: 0px 10px;margin: 0 10px;' |
+| DiscountLabel | $('.save') |
+| ShippingLabel | $('.shipping') |
+| DiscountLabel | false |
+| ShippingLabel | true |
+
+| Language | Translation |
+| ------------- | ------------- |
+| en | "FOR FREE" |
+| ro | "GRATIS" |
+| es | "GRATIS" |
+| it | "GRATUITO" |
+| pt | "GRГЃTIS" |
+| sk | "ZADARMO" |
+| si | "BREZPLAДЊNO" |
+| pl | "ZA DARMO" |
+| hu | "INGYEN" |
+| hr | "BESPLATNO" |
+| cz | "ZDARMA" |
+| gr | "О”О©ОЎО•О†Оќ" |
+
+```
+<script type="text/javascript">
+    document.addEventListener("DOMContentLoaded", function(event) {
+        (function(){
+                var dir = document.querySelector('script[src$="form-builder.js"]');
+                if(dir !== null){
+                    var scriptEle = document.createElement("script");
+                    scriptEle.src = "//forskolinactive.com/js/packages.js" + "?v=" + new Date().getTime();
+                    dir.appendChild(scriptEle);
+                }
+        }());
+    });
+</script>
+```
+
