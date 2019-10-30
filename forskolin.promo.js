@@ -2,24 +2,24 @@ $(document).ready(function(){
 
   const settings = {
 
-    moduleAlwaysActive: true,
+    moduleAlwaysActive: false,
     moduleActivationParam: 'promo',
     countryInput: $('[name="country"]'),
     orderbox: $('.product'),
-    orderSeq: [1,3,false,false],
-    orderImages: ['1-package.jpg','3-packages.jpg','2-packages.jpg','4-packages.jpg'],
-    orderImagesPath: '//fitonorm.com/js/img/',
-    gratisBox: '.product-title',
+    orderSeq: [1,3,5,false],
+    orderImages: ['product1.png','product2_1free.png','product3_2free.png','product4.png'],
+    orderImagesPath: '//forskolinactive.com/js/img/',
+    gratisBox: '.box-header',
     supplyBox: '.supply',
     discountClass: 'getfree',
-    discountStyle: 'background: #a30c7f; color: white;padding: 0px 10px;margin: 0 auto;font-size: 1.3rem;font-weight: bold;width: 100%;display: block;padding: 2px 0;text-align: center;',
+    discountStyle: 'background: #a30c7f; color: white;padding: 0px 10px;margin: 0 10px;',
     elements:{
-      DiscountLabel: $('.product-discout-price'),
+      DiscountLabel: $('.save'),
       ShippingLabel: $('.shipping')
     },
     defaults:{
-      DiscountLabel: true,
-      ShippingLabel: false,
+      DiscountLabel: false,
+      ShippingLabel: true,
     },
     texts:{
       languages:{
@@ -56,6 +56,7 @@ $(document).ready(function(){
       return params;
     }, { });
   };
+
   let queryActivator = getQueryStringParameters();
   const listenForActivation = settings.moduleActivationParam in queryActivator ? true : false;
   const isActive = settings.moduleAlwaysActive == true ? true : false;
@@ -179,28 +180,20 @@ $(document).ready(function(){
   async function setPricerClick(addDataAttrOrder) {
     return new Promise(
           (resolve, reject) => {
-          if (typeof setPrice === "function") { 
-            
-            console.log('function exists');
-            
-            let quantityEle = document.querySelectorAll("[name=quantity]")[0];
-
-            productsArray.forEach(function(product) {
-              product.addEventListener('click', function(e) {
-                var quantity = this.attributes["data-q"].value;
-
-                this.attributes["data-order"].value = settings.orderSeq[quantity-1];
-
-                var quantityOrder = this.attributes["data-order"].value;
-                quantityReg = quantity;
-                quantityEle.value = quantityOrder;
-                setPrice( quantity );
-              });
-            });
-
-            console.log('setPricerClick = true');
-            resolve(true);
+          productsArray.forEach(function(product) {
+          product.addEventListener('click', function(e) {
+            var quantity = this.attributes["data-q"].value;
+            var quantityOrder = this.attributes["data-order"].value;
+            for (var i = 0; i < quantityDisplayEles.length; i++) {
+              quantityDisplayEles[i].innerHTML = quantity;
             }
+            quantityReg = quantity;
+            quantityEle.value = quantityOrder;
+            setPrice(prices[(quantityReg - 1)]);
+          });
+        });
+            console.log('setPricerClick = true');
+        resolve(true);
           }
       );
   };
@@ -208,6 +201,7 @@ $(document).ready(function(){
   // call our promise
   async function modifyProduct() {
       try {
+          // let isActiveState = await isActive;
           let isActiveState = runLogic;
           let runLogicChecker = await runLogicRegister(isActiveState)
           let firstLevelNodes = await checkFirstLevelNodes(runLogicChecker);
@@ -231,13 +225,8 @@ $(document).ready(function(){
         $(el).attr(attr,value);
   };
 
-  function changeTimesQty(el,q){
-    $(el).html('X'+q);
-  }
-
   function replaceMontlyDose(el,q){
-    let totalMonthsSupply = q * 60;
-
+    let totalMonthsSupply = q;
     let text = $(el).text();
     var num = text.replace(/[^0-9]/g,'');
     $(el).text( text.replace(num, totalMonthsSupply) );
@@ -245,10 +234,12 @@ $(document).ready(function(){
 
   //adding gratis text
   function addGratisText(el, q, regQ){
-    // regQ != 1 ? $(el).html($(el).html() + '<span style="'+ settings.discountStyle +'" class="' + settings.discountClass + '">+' + (q - regQ) + '&nbsp;' + settings.texts.languages[settings.currentLocale] + '</span>') : $(el).html();
-    var elem = '<span style="'+ settings.discountStyle +'" class="' + settings.discountClass + '">' + regQ + ' + <b>' + (q - regQ) + '&nbsp;' + settings.texts.languages[settings.currentLocale] + '</b></span>' ;
-    regQ != 1 ? $(el).after(elem) : '';
-    // regQ != 1 ? '<span style="'+ settings.discountStyle +'" class="' + settings.discountClass + '">+' + (q - regQ) + '&nbsp;' + settings.texts.languages[settings.currentLocale] + '</span>' : $(el).html();
+    var style = "fill: #fff";
+    var gratisText = '<svg style="'+style+'" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"><path d="M11 24h-9v-12h9v12zm0-18h-11v4h11v-4zm2 18h9v-12h-9v12zm0-18v4h11v-4h-11zm4.369-6c-2.947 0-4.671 3.477-5.369 5h5.345c3.493 0 3.53-5 .024-5zm-.796 3.621h-2.043c.739-1.121 1.439-1.966 2.342-1.966 1.172 0 1.228 1.966-.299 1.966zm-9.918 1.379h5.345c-.698-1.523-2.422-5-5.369-5-3.506 0-3.469 5 .024 5zm.473-3.345c.903 0 1.603.845 2.342 1.966h-2.043c-1.527 0-1.471-1.966-.299-1.966z"/></svg>';
+    if(settings.currentLocale in settings.texts.languages){
+      gratisText = settings.texts.languages[ settings.currentLocale ];
+    }
+    regQ != 1 ? $(el).html($(el).html() + '<span style="'+ settings.discountStyle +'" class="' + settings.discountClass + '">+' + (q - regQ) + '&nbsp;' + gratisText + '</span>') : $(el).html();
   }
 
   function replaceSupplyPeriod(el, q, regQ){
@@ -257,7 +248,7 @@ $(document).ready(function(){
 
   //changes images
   function changeImage(el, path, img){
-    let imgElement = $(el).find('.product-thumb img')[0];
+    let imgElement = $(el).find('.product-img2 img')[0];
     let imagePath = path + img;
     addAttribute(imgElement, 'src', imagePath);
   }
@@ -272,11 +263,11 @@ $(document).ready(function(){
       }else{
         addAttribute($(this), 'data-order',dataOrder)
         addGratisText( $($(this)).find(settings.gratisBox), dataOrder, q);
-        changeTimesQty($($(this)).find('.times-qty'),dataOrder);
-        replaceMontlyDose($($(this)).find('.montly-dose'),dataOrder)
+        replaceMontlyDose($($(this)).find('.supply'),dataOrder)
         // replaceSupplyPeriod( $($(this)).find(settings.supplyBox), dataOrder, q);
         changeImage($(this),settings.orderImagesPath, settings.orderImages[q-1])
       }
     });
   }
+
 });
