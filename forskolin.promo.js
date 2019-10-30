@@ -1,14 +1,18 @@
 $(document).ready(function(){
 
+  document.getElementsByClassName('bonus-bottle')[0].remove();
+
   const settings = {
 
-    moduleAlwaysActive: false,
+    moduleAlwaysActive: true,
     moduleActivationParam: 'promo',
     countryInput: $('[name="country"]'),
     orderbox: $('.product'),
-    orderSeq: [1,3,5,false],
-    orderImages: ['product1.png','product2_1free.png','product3_2free.png','product4.png'],
-    orderImagesPath: '//forskolinactive.com/js/img/',
+    orderSeq: [1,3,4,6],
+    // orderImages: ['product1.png','product2_1free.png','product3_2free.png','product4.png'],
+    // orderImagesPath: '//forskolinactive.com/js/img/',
+    orderImages: ['1.png','2+1.png','3+1.png','4+2.png'],
+    orderImagesPath: '//forskolinactive.com/js/packages/images/',
     gratisBox: '.box-header',
     supplyBox: '.supply',
     discountClass: 'getfree',
@@ -18,7 +22,7 @@ $(document).ready(function(){
       ShippingLabel: $('.shipping')
     },
     defaults:{
-      DiscountLabel: false,
+      DiscountLabel: true,
       ShippingLabel: true,
     },
     texts:{
@@ -61,17 +65,14 @@ $(document).ready(function(){
   const listenForActivation = settings.moduleActivationParam in queryActivator ? true : false;
   const isActive = settings.moduleAlwaysActive == true ? true : false;
   const runLogic = isActive == true ? true : (listenForActivation == true ? true : false);
-  console.log(runLogic);
 
     async function runLogicRegister(runLogicVar) {
       return new Promise(
           (resolve, reject) => {
               if (runLogic) {
               const runState = true;
-              console.log('runLogicRegister = true')
                 resolve(runState);
             } else {
-              console.log('runLogicRegister = false')
                 const error = new Error('Error runLogicRegister did not start');
                 reject(error);
             }
@@ -84,10 +85,8 @@ $(document).ready(function(){
           (resolve, reject) => {
               if (settings.orderbox) {
               const productExists = true;
-              console.log('checkFirstLevelNodes = true')
                 resolve(productExists);
             } else {
-              console.log('checkFirstLevelNodes = false')
                 const error = new Error('Error element OrderBox did not exist');
                 reject(error);
             }
@@ -100,10 +99,8 @@ $(document).ready(function(){
           (resolve, reject) => {
               if (settings.elements.DiscountLabel && settings.elements.ShippingLabel) {
               const secondLevelNodes  = true;
-              console.log('checkSecondLevelNodes = true')
                 resolve(secondLevelNodes);
             } else {
-              console.log('checkSecondLevelNodes = false')
                 const error = new Error('Error SecondLevelNodes dont exist');
                 reject(error);
             }
@@ -138,10 +135,8 @@ $(document).ready(function(){
               // if (settings.elements.DiscountLabel && settings.elements.ShippingLabel) {
               if (existance) {
               const secondLevelNodes  = true;
-              console.log('runDefaultSettings = true')
                 resolve(secondLevelNodes);
             } else {
-              console.log('runDefaultSettings = false')
                 const error = new Error('Error runDefaultSettings cannot run because checkNodeExistance dont exist');
                 reject(error);
             }
@@ -192,7 +187,6 @@ $(document).ready(function(){
             setPrice(prices[(quantityReg - 1)]);
           });
         });
-            console.log('setPricerClick = true');
         resolve(true);
           }
       );
@@ -234,6 +228,7 @@ $(document).ready(function(){
 
   //adding gratis text
   function addGratisText(el, q, regQ){
+    $(el).find('span').text(regQ)
     var style = "fill: #fff";
     var gratisText = '<svg style="'+style+'" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"><path d="M11 24h-9v-12h9v12zm0-18h-11v4h11v-4zm2 18h9v-12h-9v12zm0-18v4h11v-4h-11zm4.369-6c-2.947 0-4.671 3.477-5.369 5h5.345c3.493 0 3.53-5 .024-5zm-.796 3.621h-2.043c.739-1.121 1.439-1.966 2.342-1.966 1.172 0 1.228 1.966-.299 1.966zm-9.918 1.379h5.345c-.698-1.523-2.422-5-5.369-5-3.506 0-3.469 5 .024 5zm.473-3.345c.903 0 1.603.845 2.342 1.966h-2.043c-1.527 0-1.471-1.966-.299-1.966z"/></svg>';
     if(settings.currentLocale in settings.texts.languages){
@@ -264,7 +259,7 @@ $(document).ready(function(){
         addAttribute($(this), 'data-order',dataOrder)
         addGratisText( $($(this)).find(settings.gratisBox), dataOrder, q);
         replaceMontlyDose($($(this)).find('.supply'),dataOrder)
-        // replaceSupplyPeriod( $($(this)).find(settings.supplyBox), dataOrder, q);
+        replaceSupplyPeriod( $($(this)).find(settings.supplyBox), dataOrder, q);
         changeImage($(this),settings.orderImagesPath, settings.orderImages[q-1])
       }
     });

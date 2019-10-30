@@ -64,7 +64,7 @@ If the website is using form-builder.js, this script will be included after the 
 
 # Mezoderma
 
-**Syntax for Mezoderma* *
+**Syntax for Mezoderma**
 
 **Upload the Product Images in desired directory, change the urls**
 
