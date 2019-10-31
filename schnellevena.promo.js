@@ -1,4 +1,5 @@
-var extend = function ( defaults, options ) {
+document.addEventListener("DOMContentLoaded", function(event) {
+  var extend = function ( defaults, options ) {
     var extended = {};
     var prop;
     for (prop in defaults) {
@@ -24,7 +25,7 @@ var extend = function ( defaults, options ) {
     orderSeq: [1,3,5,8],
     orderImages: ['1-package.png','2-packages.png','3-packages.png','4-packages.png'],
     orderImagesPath: '//schnellevena.com/js/packages/images/',
-    gratisBox: '.product-name',
+    gratisBox: '.product-info span.fs18.italic.bold',
     supplyBox: '.product-qty',
     discountClass: 'getfree',
     discountStyle: 'background: #a30c7f;color: white;padding: 0px 10px;margin: 0 auto;font-weight: bold;display: inline-block;padding: 2px 0;text-align: left;padding: 5px;',
@@ -281,10 +282,11 @@ var extend = function ( defaults, options ) {
       }else{
         addAttribute($(this), 'data-order',dataOrder)
         addGratisText( $($(this)).find(settings.gratisBox), dataOrder, q);
-        changeTimesQty($($(this)).find('.product-qty'),dataOrder);
-        replaceMontlyDose($($(this)).find('.montly-dose'),dataOrder)
+        changeTimesQty($($(this)).find('.product-info span.fs60.bold'),dataOrder);
+        // replaceMontlyDose($($(this)).find('.montly-dose'),dataOrder)
         // replaceSupplyPeriod( $($(this)).find(settings.supplyBox), dataOrder, q);
         changeImage($(this),settings.orderImagesPath, settings.orderImages[q-1])
       }
     });
   }
+});

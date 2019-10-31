@@ -1,3 +1,5 @@
+document.addEventListener("DOMContentLoaded", function(event) {
+
   var extend = function ( defaults, options ) {
     var extended = {};
     var prop;
@@ -294,4 +296,4 @@
       }
     });
   }
-  console.log(3)
+});
