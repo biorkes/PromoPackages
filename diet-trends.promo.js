@@ -1,5 +1,3 @@
-document.addEventListener("DOMContentLoaded", function(event) {
-
   var extend = function ( defaults, options ) {
     var extended = {};
     var prop;
@@ -300,5 +298,3 @@ document.addEventListener("DOMContentLoaded", function(event) {
       }
     });
   }
-});
-
