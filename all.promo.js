@@ -61,7 +61,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
                 it: "GRATUITO",
                 pt: "PRESENTE",
                 sk: "ZADARMO",
-                si: "DARILO",
+                si: "BREZPLAČNO",
                 pl: "ZA DARMO",
                 hu: "INGYEN",
                 hr: "BESPLATNO",
