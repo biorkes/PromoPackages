@@ -308,7 +308,6 @@ document.addEventListener("DOMContentLoaded", function(event) {
   function _setDefaultValues() {
     _setDefaultValues = _asyncToGenerator(function*() {
       return new Promise((resolve, reject) => {
-        let defaults = settings.defaults;
         settings.currentLocale = settings.countryInput.value;
 
         for (let i = 0; i < settings.elements.length; i++) {
@@ -406,7 +405,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
         let secondLevelNodes = yield checkSecondLevelNodes(firstLevelNodes);
         let setDefaultsValues = yield setDefaultValues(secondLevelNodes);
         let runChanges = yield addDataAttrOrder(setDefaultsValues);
-        let setClickerLogic = yield setPricerClick(runChanges);
+        yield setPricerClick(runChanges);
       } catch (error) {
         console.log(error.message);
       }
@@ -421,13 +420,6 @@ document.addEventListener("DOMContentLoaded", function(event) {
   function changeTimesQty(timesQty, q) {
     timesQty.setAttribute("style", "font-size:3rem");
     timesQty.innerHTML = q + "X";
-  }
-
-  function replaceMontlyDose(el, q) {
-    let totalMonthsSupply = q * 60;
-    let text = el.innerText;
-    let num = text.replace(/[^0-9]/g, "");
-    el.innerText = text.replace(num, totalMonthsSupply);
   }
 
   function addGratisText(el, q, regQ) {
@@ -449,10 +441,6 @@ document.addEventListener("DOMContentLoaded", function(event) {
       "</span>";
     el.innerHTML = regQ !== 1 ? elem : el.innerHTML;
   }
-
-  function replaceSupplyPeriod(el, q, regQ) {
-    el.innerText = regQ !== 1 ? el.innerText.replace(regQ, q) : el.innerText;
-  } //changes images
 
   function changeImage(el, path, img) {
     let imgElement = el.querySelector(settings.package.packageImageElement);

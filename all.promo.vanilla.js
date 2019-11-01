@@ -189,12 +189,9 @@ document.addEventListener("DOMContentLoaded", function(event) {
     async function setDefaultValues() {
         return new Promise(
             (resolve, reject) => {
-                let defaults = settings.defaults;
                 settings.currentLocale = settings.countryInput.value;
-
                 for(let i = 0; i < settings.elements.length; i++){
-
-                  for (var eleName in settings.elements[i]) {
+                  for (let eleName in settings.elements[i]) {
                     if(settings.elements[eleName].show === false){
                       document.querySelectorAll(settings.elements[eleName].element).style.display = 'none';
                     }
@@ -219,8 +216,6 @@ document.addEventListener("DOMContentLoaded", function(event) {
                     addGratisText( e.querySelector(settings.package.packageGratisParentElement) , dataOrder, q);
                     changeTimesQty( e.querySelector(settings.package.packageNumberElement) , dataOrder);
                     changeImage(e, settings.orderImagesPath, settings.orderImages[q - 1])
-                    // replaceMontlyDose($($(this)).find('.montly-dose'),dataOrder)
-                    // replaceSupplyPeriod( $($(this)).find(settings.package.packageNumberElement), dataOrder, q);
                   }
                 });
 
@@ -260,7 +255,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
                 let secondLevelNodes = await checkSecondLevelNodes();
                 let setDefaultsValues = await setDefaultValues();
                 let runChanges = await addDataAttrOrder(setDefaultsValues);
-                let setClickerLogic = await setPricerClick(runChanges);
+                await setPricerClick(runChanges);
             } catch (error) {
                 console.log(error.message);
             }
@@ -275,21 +270,10 @@ document.addEventListener("DOMContentLoaded", function(event) {
         timesQty.innerHTML = q + 'X';
     }
 
-    function replaceMontlyDose(el, q) {
-        let totalMonthsSupply = q * 60;
-        let text = el.innerText;
-        let num = text.replace(/[^0-9]/g, '');
-        el.innerText = text.replace(num, totalMonthsSupply);
-    }
-
     function addGratisText(el, q, regQ) {
         let gratisText = settings.currentLocale in settings.texts.languages ? settings.texts.languages[settings.currentLocale] : settings.texts.fallback;
         let elem = '<span style="' + settings.gratis.packageGratisStyle + '" class="' + settings.gratis.packageGratisClass + '">' + regQ + ' + ' + (q - regQ) + '&nbsp;' + gratisText + '</span>';
         el.innerHTML = regQ !== 1 ? elem : el.innerHTML;
-    }
-
-    function replaceSupplyPeriod(el, q, regQ) {
-      el.innerText = regQ !== 1 ? el.innerText.replace(regQ, q) : el.innerText;
     }
 
     //changes images
