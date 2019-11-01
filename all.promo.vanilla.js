@@ -92,7 +92,6 @@ document.addEventListener("DOMContentLoaded", function(event) {
                 query = url.split("?")[1];
             }
         } else {
-            url = window.location.href;
             query = window.location.search.substring(1);
         }
         return (/^[?#]/.test(query) ? query.slice(1) : query)
@@ -250,8 +249,8 @@ document.addEventListener("DOMContentLoaded", function(event) {
                 let isActiveState = runLogic;
                 let runLogicChecker = await runLogicRegister(isActiveState)
                 let firstLevelNodes = await checkProductBoxExistance(runLogicChecker);
-                let secondLevelNodes = await checkSecondLevelNodes();
-                let setDefaultsValues = await setDefaultValues();
+                let secondLevelNodes = await checkSecondLevelNodes(firstLevelNodes);
+                let setDefaultsValues = await setDefaultValues(secondLevelNodes);
                 let runChanges = await addDataAttrOrder(setDefaultsValues);
                 await setPricerClick(runChanges);
             } catch (error) {
