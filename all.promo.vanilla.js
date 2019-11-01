@@ -1,5 +1,4 @@
 document.addEventListener("DOMContentLoaded", function(event) {
-
     /**
      * Merge user settings with default settings
      */
@@ -32,25 +31,25 @@ document.addEventListener("DOMContentLoaded", function(event) {
         orderSeq: [1, 3, 5, 8],
         orderImages: ['1-package.png', '2-packages.png', '3-packages.png', '4-packages.png'],
         orderImagesPath: '//schnellevena.com/js/packages/images/',
-        package:{
-          packageGratisParentElement: '.product-info span.fs18.italic.bold',
-          packageNumberElement: '.product-info span.fs60.bold',
-          packageImageElement: '.product-thumb img',
+        package: {
+            packageGratisParentElement: '.product-info span.fs18.italic.bold',
+            packageNumberElement: '.product-info span.fs60.bold',
+            packageImageElement: '.product-thumb img',
         },
-        gratis:{
-          packageGratisClass: 'getfree',
-          packageGratisStyle: 'background: #a30c7f;color: white;padding: 0px 10px;margin: 0 auto;font-weight: bold;display: inline-block;padding: 2px 0;text-align: left;padding: 5px;',
+        gratis: {
+            packageGratisClass: 'getfree',
+            packageGratisStyle: 'background: #a30c7f;color: white;padding: 0px 10px;margin: 0 auto;font-weight: bold;display: inline-block;padding: 2px 0;text-align: left;padding: 5px;',
         },
         elements: {
-            discountLabel:{
-              show: true,
-              element: ".product-discout-price",
-              style: ''
+            discountLabel: {
+                show: true,
+                element: ".product-discout-price",
+                style: ''
             },
-            shippingLabel:{
-              show: true,
-              element: ".shipping",
-              style: ''
+            shippingLabel: {
+                show: true,
+                element: ".shipping",
+                style: ''
             }
         },
         texts: {
@@ -135,7 +134,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
     async function checkProductBoxExistance(isActive) {
         return new Promise(
             (resolve, reject) => {
-                if(typeof document.querySelectorAll(settings.orderbox) === 'object'){
+                if (typeof document.querySelectorAll(settings.orderbox) === 'object') {
                     resolve(true);
                 } else {
                     const error = new Error('Error element OrderBox does not exist');
@@ -148,40 +147,40 @@ document.addEventListener("DOMContentLoaded", function(event) {
     async function checkSecondLevelNodes() {
         return new Promise(
             (resolve, reject) => {
-              let err = {count:0,message:''};
-              if(settings.elements.discountLabel.show === true){
-                if(typeof document.querySelectorAll(settings.elements.discountLabel.element) !== "object"){
-                  err.count++;
-                  err.message = 'Error Discount Label was not found with this selector: "' + settings.elements.discountLabel.element + '"';
+                let err = { count: 0, message: '' };
+                if (settings.elements.discountLabel.show === true) {
+                    if (typeof document.querySelectorAll(settings.elements.discountLabel.element) !== "object") {
+                        err.count++;
+                        err.message = 'Error Discount Label was not found with this selector: "' + settings.elements.discountLabel.element + '"';
+                    }
                 }
-              }
-              if(settings.elements.shippingLabel.show === true){
-                if(typeof document.querySelectorAll(settings.elements.shippingLabel.element) !== "object"){
-                  err.count++;
-                  err.message = 'Error Shipping Label was not found with this selector: "' + settings.elements.shippingLabel.element + '"';
+                if (settings.elements.shippingLabel.show === true) {
+                    if (typeof document.querySelectorAll(settings.elements.shippingLabel.element) !== "object") {
+                        err.count++;
+                        err.message = 'Error Shipping Label was not found with this selector: "' + settings.elements.shippingLabel.element + '"';
+                    }
                 }
-              }
-              if(typeof document.querySelectorAll(settings.package.packageGratisParentElement) !== "object"){
-                  err.count++;
-                  err.message = 'Error Gratis Parent was not found with this selector: "' + settings.package.packageGratisParentElement + '"';
-              }
-              if(typeof document.querySelectorAll(settings.package.packageNumberElement) !== "object"){
-                  err.count++;
-                  err.message = 'Error Package Number was not found with this selector: "' + settings.package.packageNumberElement + '"';
-              }
-              if(typeof document.querySelectorAll(settings.package.packageImageElement) !== "object"){
-                  err.count++;
-                  err.message = 'Error Package Image was not found with this selector: "' + settings.package.packageImageElement + '"';
-              }
+                if (typeof document.querySelectorAll(settings.package.packageGratisParentElement) !== "object") {
+                    err.count++;
+                    err.message = 'Error Gratis Parent was not found with this selector: "' + settings.package.packageGratisParentElement + '"';
+                }
+                if (typeof document.querySelectorAll(settings.package.packageNumberElement) !== "object") {
+                    err.count++;
+                    err.message = 'Error Package Number was not found with this selector: "' + settings.package.packageNumberElement + '"';
+                }
+                if (typeof document.querySelectorAll(settings.package.packageImageElement) !== "object") {
+                    err.count++;
+                    err.message = 'Error Package Image was not found with this selector: "' + settings.package.packageImageElement + '"';
+                }
 
-              if(err.count === 0){
-                const secondLevelNodes = true;
-                resolve(secondLevelNodes);
-              }else{
-                const error = new Error(err.message);
-                reject(error);
-              }
-             
+                if (err.count === 0) {
+                    const secondLevelNodes = true;
+                    resolve(secondLevelNodes);
+                } else {
+                    const error = new Error(err.message);
+                    reject(error);
+                }
+
             }
         );
     };
@@ -190,12 +189,12 @@ document.addEventListener("DOMContentLoaded", function(event) {
         return new Promise(
             (resolve, reject) => {
                 settings.currentLocale = settings.countryInput.value;
-                for(let i = 0; i < settings.elements.length; i++){
-                  for (let eleName in settings.elements[i]) {
-                    if(settings.elements[eleName].show === false){
-                      document.querySelectorAll(settings.elements[eleName].element).style.display = 'none';
+                for (let i = 0; i < settings.elements.length; i++) {
+                    for (let eleName in settings.elements[i]) {
+                        if (settings.elements[eleName].show === false) {
+                            document.querySelectorAll(settings.elements[eleName].element).style.display = 'none';
+                        }
                     }
-                  }
                 }
                 resolve(true);
             }
@@ -205,18 +204,18 @@ document.addEventListener("DOMContentLoaded", function(event) {
     async function addDataAttrOrder(exist) {
         return new Promise(
             (resolve, reject) => {
-                
-                document.querySelectorAll(settings.orderbox).forEach(function(e,i){
-                  let q = parseInt(e.getAttribute('data-q'));
-                  let dataOrder = settings.orderSeq[q - 1];
-                  if( dataOrder == false ){
-                    e.style.display = 'none';
-                  }else{
-                    e.setAttribute('data-order', dataOrder);
-                    addGratisText( e.querySelector(settings.package.packageGratisParentElement) , dataOrder, q);
-                    changeTimesQty( e.querySelector(settings.package.packageNumberElement) , dataOrder);
-                    changeImage(e, settings.orderImagesPath, settings.orderImages[q - 1])
-                  }
+
+                document.querySelectorAll(settings.orderbox).forEach(function(e, i) {
+                    let q = parseInt(e.getAttribute('data-q'));
+                    let dataOrder = settings.orderSeq[q - 1];
+                    if (dataOrder == false) {
+                        e.style.display = 'none';
+                    } else {
+                        e.setAttribute('data-order', dataOrder);
+                        addGratisText(e.querySelector(settings.package.packageGratisParentElement), dataOrder, q);
+                        changeTimesQty(e.querySelector(settings.package.packageNumberElement), dataOrder);
+                        changeImage(e, settings.orderImagesPath, settings.orderImages[q - 1])
+                    }
                 });
 
                 resolve(true);
@@ -266,7 +265,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
 
     function changeTimesQty(timesQty, q) {
-        timesQty.setAttribute('style',"font-size:3rem");
+        timesQty.setAttribute('style', "font-size:3rem");
         timesQty.innerHTML = q + 'X';
     }
 
