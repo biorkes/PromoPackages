@@ -145,7 +145,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
         );
     };
 
-    async function checkSecondLevelNodes(exist) {
+    async function checkSecondLevelNodes() {
         return new Promise(
             (resolve, reject) => {
               let err = {count:0,message:''};
@@ -257,8 +257,8 @@ document.addEventListener("DOMContentLoaded", function(event) {
                 let isActiveState = runLogic;
                 let runLogicChecker = await runLogicRegister(isActiveState)
                 let firstLevelNodes = await checkProductBoxExistance(runLogicChecker);
-                let secondLevelNodes = await checkSecondLevelNodes(firstLevelNodes);
-                let setDefaultsValues = await setDefaultValues(secondLevelNodes);
+                let secondLevelNodes = await checkSecondLevelNodes();
+                let setDefaultsValues = await setDefaultValues();
                 let runChanges = await addDataAttrOrder(setDefaultsValues);
                 let setClickerLogic = await setPricerClick(runChanges);
             } catch (error) {
