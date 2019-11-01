@@ -2,6 +2,46 @@
 
 # Explanation
 
+## Default Settings
+
+```
+| Setting       | Value         |
+| ------------- | ------------- |
+| moduleAlwaysActive | true |
+| moduleActivationParam | "promo" |
+| countryInput | document.querySelectorAll("input[name=country]")[0] |
+| orderbox | ".product" |
+| orderSeq | [1, 3, 5, 8] |
+| orderImages | [ "1-package.png",  "2-packages.png",  "3-packages.png",  "4-packages.png"] |
+| orderImagesPath | "//schnellevena.com/js/packages/images/" |
+| package.packageGratisParentElement | ".product-info span.fs18.italic.bold" |
+| package.packageNumberElement | ".product-info span.fs60.bold" |
+| package.packageImageElement | ".product-thumb img" |
+| gratis.packageGratisClass | "getfree" |
+| gratis.packageGratisStyle | "background: #a30c7f;color: white;padding: 0px 10px;margin: 0 auto;font-weight: bold;display: inline-block;padding: 2px 0;text-align: left;padding: 5px;" |
+| elements.discountLabel.show | true |
+| elements.discountLabel.element | ".product-discout-price" |
+| elements.discountLabel.style | "" |
+| elements.shippingLabel.show | true |
+| elements.discountLabel.element | ".shipping" |
+| elements.discountLabel.style | "" |
+| texts.languages.en | "FOR FREE" |
+| texts.languages.ro | "GRATIS" |
+| texts.languages.es | "GRATIS" |
+| texts.languages.it | "GRATUITO" |
+| texts.languages.pt | "PRESENTE" |
+| texts.languages.sk | "ZADARMO" |
+| texts.languages.si | "BREZPLAČNO" |
+| texts.languages.pl | "ZA DARMO" |
+| texts.languages.hu | "INGYEN" |
+| texts.languages.hr | "BESPLATNO" |
+| texts.languages.cz | "ZDARMA" |
+| texts.languages.gr | "ΔΩΡΟ |
+| fallback | 
+    '<svg style="fill: #fff" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"><path d="M11 24h-9v-12h9v12zm0-18h-11v4h11v-4zm2 18h9v-12h-9v12zm0-18v4h11v-4h-11zm4.369-6c-2.947 0-4.671 3.477-5.369 5h5.345c3.493 0 3.53-5 .024-5zm-.796 3.621h-2.043c.739-1.121 1.439-1.966 2.342-1.966 1.172 0 1.228 1.966-.299 1.966zm-9.918 1.379h5.345c-.698-1.523-2.422-5-5.369-5-3.506 0-3.469 5 .024 5zm.473-3.345c.903 0 1.603.845 2.342 1.966h-2.043c-1.527 0-1.471-1.966-.299-1.966z"/></svg>' |
+
+```
+
 To activate the script **for a channel** - copy-paste the js snippet in the body script section in Cmanager and replace the url of the promo script
 
 ***If the website is using form-builder.js and you are using this snippet in the Cmanager, use this snippet below and replace the scriptEle.src with the proper script for the product webpage. This example snippet is using the *schnellevena* promotional js file.***
