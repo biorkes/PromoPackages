@@ -17,7 +17,6 @@ document.addEventListener("DOMContentLoaded", function(event) {
         }
         return extended;
     };
-
     /**
      * Default Settings
      * @type {Object}
