@@ -1,4 +1,5 @@
-"use strict";
+'use strict';
+
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {
   try {
     var info = gen[key](arg);
@@ -131,6 +132,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
    */
 
   const getQueryStringParameters = url => {
+    let query;
     if (url) {
       if (url.split("?").length > 0) {
         query = url.split("?")[1];
@@ -348,7 +350,8 @@ document.addEventListener("DOMContentLoaded", function(event) {
               e,
               settings.orderImagesPath,
               settings.orderImages[q - 1]
-            ); // replaceMontlyDose($($(this)).find('.montly-dose'),dataOrder)
+            ); 
+            // replaceMontlyDose($($(this)).find('.montly-dose'),dataOrder)
             // replaceSupplyPeriod( $($(this)).find(settings.package.packageNumberElement), dataOrder, q);
           }
         });
