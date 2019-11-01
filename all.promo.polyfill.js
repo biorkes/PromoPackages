@@ -130,28 +130,34 @@ document.addEventListener("DOMContentLoaded", function(event) {
    * @param  {String} url Current Url String
    * @return {Array}  Array containing query params as a key - value pair
    */
-
-  const getQueryStringParameters = url => {
-    let query;
-    if (url) {
-      if (url.split("?").length > 0) {
-        query = url.split("?")[1];
-      }
-    } else {
-      url = window.location.href;
-      query = window.location.search.substring(1);
+    if (typeof NodeList !== "undefined" && NodeList.prototype && !NodeList.prototype.forEach) {
+        // Yes, there's really no need for `Object.defineProperty` here
+        NodeList.prototype.forEach = Array.prototype.forEach;
     }
+  var getQueryStringParameters = function getQueryStringParameters(url) {
+  var query;
 
-    return (/^[?#]/.test(query) ? query.slice(1) : query)
-      .split("&")
-      .reduce((params, param) => {
-        let [key, value] = param.split("=");
-        params[key] = value
-          ? decodeURIComponent(value.replace(/\+/g, " "))
-          : "";
-        return params;
-      }, {});
-  };
+  if (url) {
+    if (url.split("?").length > 0) {
+      query = url.split("?")[1];
+    }
+  } else {
+    url = window.location.href;
+    query = window.location.search.substring(1);
+  }
+
+  return (/^[?#]/.test(query) ? query.slice(1) : query)
+    .split("&")
+    .reduce(function(params, param) {
+      var _param$split = param.split("="),
+        key = _param$split[0],
+        value = _param$split[1];
+
+      params[key] = value ? decodeURIComponent(value.replace(/\+/g, " ")) : "";
+      return params;
+    }, {});
+};
+
   /**
    * Store the array with query params in a variable
    * @type {Array}
@@ -375,7 +381,8 @@ document.addEventListener("DOMContentLoaded", function(event) {
             product.addEventListener("click", function(e) {
               var quantity = parseInt(this.attributes["data-q"].value);
               var quantityOrder = this.attributes["data-order"].value;
-              quantityOrder.value = settings.orderSeq[quantity - 1];
+              console.log(quantityOrder)
+              quantityOrder = settings.orderSeq[quantity - 1];
               quantityEle.value = quantityOrder;
             });
           });
