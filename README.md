@@ -111,6 +111,27 @@ var packageSettings = {
 <script src="//mezodermacream.com/js/packages/packages.js"></script>
 ```
 
+# Теchnoweek
+
+**Syntax for Теchnoweek**
+
+**Upload the Product Images in desired directory, change the urls**
+
+```
+<script type="text/javascript">
+  document.addEventListener("DOMContentLoaded", function(event) {
+      (function(){
+              var dir = document.querySelector('script[src$="form-builder.js"]');
+              if(dir !== null){
+                  var scriptEle = document.createElement("script");
+                  scriptEle.src = "//forskolinactive.com/js/packages/technoweek/pt/packages.js" + "?v=" + new Date().getTime();
+                  dir.appendChild(scriptEle);
+              }
+      }());
+  });
+</script>
+```
+
 
 
 # Glycozal
