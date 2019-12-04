@@ -18,7 +18,6 @@ document.addEventListener("DOMContentLoaded", function(event) {
   };
 
   document.getElementsByClassName('bonus-bottle')[0].remove();
-
   const settingsDefault = {
 
       moduleAlwaysActive: true,
