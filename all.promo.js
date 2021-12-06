@@ -339,6 +339,9 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
                     if (dataOrder == false) {
                         e.style.display = "none";
+                    } else if (parseInt(dataOrder) === q) {
+                        resolve(false);
+                        return;
                     } else {
                         e.setAttribute("data-order", dataOrder);
                         addGratisText(
@@ -375,11 +378,17 @@ document.addEventListener("DOMContentLoaded", function(event) {
                     let productsArray = document.querySelectorAll(settings.orderbox);
                     productsArray.forEach(function(product) {
                         product.addEventListener("click", function(e) {
+
                             var quantity = parseInt(this.attributes["data-q"].value);
-                            var quantityOrder = this.attributes["data-order"].value;
-                            console.log(quantityOrder)
-                            quantityOrder = settings.orderSeq[quantity - 1];
-                            quantityEle.value = quantityOrder;
+
+                            if (this.attributes.hasOwnProperty('data-order')) {
+                                var quantityOrder = this.attributes["data-order"].value;
+                                quantityOrder = settings.orderSeq[quantity - 1];
+                                quantityEle.value = quantityOrder;
+                            } else {
+                                resolve(false);
+                                return;
+                            }
                         });
                     });
                     resolve(true);
@@ -402,6 +411,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
                 let secondLevelNodes = yield checkSecondLevelNodes(firstLevelNodes);
                 let setDefaultsValues = yield setDefaultValues(secondLevelNodes);
                 let runChanges = yield addDataAttrOrder(setDefaultsValues);
+                console.log(runChanges)
                 yield setPricerClick(runChanges);
             } catch (error) {
                 console.log(error.message);
